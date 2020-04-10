@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 """
+数据结构
 元组 tuple = ()
 元素不可修改
 """
@@ -48,6 +49,6 @@ print(t)
 list2 = ['及附近', '加法减法', '大家觉得']
 tuple2 = ('及附近', '加法减法', '大家觉得')
 # 88
-print (sys.getsizeof(list2))
+print(sys.getsizeof(list2))
 # 72
-print (sys.getsizeof(tuple2))
+print(sys.getsizeof(tuple2))

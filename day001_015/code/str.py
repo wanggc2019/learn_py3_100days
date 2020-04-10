@@ -72,9 +72,10 @@ print(str3.strip())   # jackfrued@126.com
 # 用%格式化
 a = 5
 b = '个人'
-print ('%d %s' % (a, b))   # 5 个人
+print('%d %s' % (a, b))   # 5 个人
 # 用format格式化
-print ('{0} {1}'.format(a, b))   # 5 个人
+print('{0} {1}'.format(a, b))   # 5 个人
+
 
 
 

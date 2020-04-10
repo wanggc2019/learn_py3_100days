@@ -73,6 +73,3 @@ list=[]
 set 添加删除元素
 5、字典 dict = {key:value}
 dict 键值对
-
-
-

@@ -2,7 +2,37 @@
 # -*- coding:utf-8 -*-
 
 """
-for
+for 循环
+"""
+
+# 求1到100得和
+s = 0
+# 0 1 2 ... 99 100
+for i in range(101):
+    s = s + i
+print('1-100间的数之和是:%d' % s)
+
+# 0 - 99 下面得2个等价,前开后闭区间
+print(range(100))
+print(range(0, 100))
+
+# 1 - 100，步长为2 即 1 3 5 ...99
+print(range(1, 100, 2))
+
+# 100 98 ... 2 从100到1范围 以步长2递减
+print(range(100, 1, -2))
+
+"""
+求1-100得偶数和
+"""
+s = 0
+# 0 1 2 ... 99 100
+for i in range(2, 101, 2):
+    s = s + i
+print('1-100间的偶数之和是：%d' % s)
+
+"""
+练习1 for
 循环结构嵌套 : 99乘法表
 1×1=1
 1×2=2	2×2=4
@@ -13,15 +43,13 @@ for
 1×7=7	2×7=14	3×7=21	4×7=28	5×7=35	6×7=42	7×7=49
 1×8=8	2×8=16	3×8=24	4×8=32	5×8=40	6×8=48	7×8=56	8×8=64
 1×9=9	2×9=18	3×9=27	4×9=36	5×9=45	6×9=54	7×9=63	8×9=72	9×9=81
-
 """
-# from __future__ import print_function
 
-# for i in range(1, 10):
-#     for j in range(1, i + 1):
-#         # 实现输出不换行的效果print('string',end) 是python3的语法，python2会报错，添加from __future__ import print_function
-#         print('{0}*{1}={2}'.format(j, i, i * j), end='\t')  # 输出不换行
-#     print()  # 换行
+for i in range(1, 10):
+    for j in range(1, i + 1):
+        # 实现输出不换行的效果print('string',end) 是python3的语法，python2会报错，添加from __future__ import print_function
+        print('{0}*{1}={2}'.format(j, i, i * j), end='\t')  # 输出不换行
+    print()  # 换行
 
 
 """
@@ -29,7 +57,7 @@ for
 xyz = x^3 + y^3 + z^3
 """
 # 限定3位数
-for num in range(100,1001):
+for num in range(100, 1001):
     m = num % 10  # 模运算，求个位数=余数
     u = num // 10 % 10  # 先整除 再取模，十位数=余数，就是把小数点向左移动一位，按照取个位数的方式再来一次
     n = num // 100  # 百位数
@@ -37,10 +65,24 @@ for num in range(100,1001):
         print('%d是水仙花数' % num)
 
 """
+百鸡百钱问题
+鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？
+公鸡x 母鸡y 小鸡z
+5x + 3y + 1/3z = 100
+暴力穷举法：x [0,20]  y [0,33]  z= 100-x-y
+"""
+for x in range(0, 20):
+    for y in range(0, 33):
+        z = 100 - x -y
+        if 5 * x + 3 * y + 1 / 3 * z == 100:
+            print('公鸡%d只，母鸡%d只，小鸡%d只' % (x, y, z))
+
+
+"""
+练习4 
 正整数的反转
 思路：就是用以上的取位数的方法，对10取模，取到最后位上的数字，然后左移
 """
-
 num = int(input('num = '))
 reversed_num = 0
 # 只要num大于0 就一直进行下面的循环
@@ -54,16 +96,4 @@ while num > 0:
     num //= 10
 print(reversed_num)
 
-"""
-百鸡百钱问题
-鸡翁一值钱五，鸡母一值钱三，鸡雏三值钱一。百钱买百鸡，问鸡翁、鸡母、鸡雏各几何？
-公鸡x 母鸡y 小鸡z
-5x + 3y + 1/3z = 100
 
-暴力穷举法：x [0,20]  y [0,33]  z= 100-x-y
-"""
-for x in range(0, 20):
-    for y in range(0, 33):
-        z = 100 - x -y
-        if 5 * x + 3 * y + 1 / 3 * z == 100:
-            print('公鸡%d只，母鸡%d只，小鸡%d只' % (x, y, z))

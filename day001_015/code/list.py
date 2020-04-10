@@ -2,14 +2,17 @@
 # -*- coding:utf-8 -*-
 
 """
-list列表
+数据结构
+list 列表
 list = [] 值的有序序列
 可通过索引标识，[],[:] 取出对应的一个或多个元素，可以修改元素
 """
+
 import sys
 
+
 '''
-1、索引，遍历，添加，移除list元素
+索引，遍历，添加，移除
 '''
 list1 = ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
 # ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
@@ -49,7 +52,7 @@ for elem in list1:
 # (3, 'internationalization')
 # (4, 'blueberry')
 for index, elem in enumerate(list1):
-    print (index, elem)
+    print(index, elem)
 
 # 3、添加
 # 3.1、追加
@@ -70,7 +73,6 @@ print(list1)
 
 # 4、删除
 # 4.1、pop 按索引删
-# 其实就是出栈
 list1.pop(0)
 # ['我是插入的', 'apple', 'zoo', 'internationalization', 'blueberry', '我是追加的', 1, 2, 3]
 print(list1)
@@ -81,7 +83,7 @@ print(list1)
 
 
 ''''
-2、成员运算
+成员运算
 '''
 # 4.1、判断元素是否在list
 if 3 in list2:
@@ -92,6 +94,7 @@ if 'apple' not in list1:
     print('apple not in list1')
 else:
     print('apple in list1')
+
 
 '''
 排序
@@ -114,6 +117,7 @@ print(list3)
 list1.sort(reverse=True)
 # ['zoo', 'orange', 'internationalization', 'blueberry', 'apple']
 print(list1)
+
 
 """
 生成式和生成器
