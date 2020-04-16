@@ -2,7 +2,25 @@
 # -*- coding:utf-8 -*-
 
 """
-****网络爬虫和相关工具****
+****网络爬虫****
+数据采集和解析
+1、工具
+下载数据 - urllib / requests / aiohttp。
+解析数据 - re / lxml / beautifulsoup4 / pyquery。
+缓存和持久化 - pymysql / sqlalchemy / peewee/ redis / pymongo。
+生成数字签名 - hashlib。
+序列化和压缩 - pickle / json / zlib。
+调度器 - 多进程（multiprocessing） / 多线程（threading）。
+
+2、页面解析方式：
+解析方式	        对应的模块	速度	  使用难度	备注
+正则表达式解析	  re	      快	     困难	常用正则表达式，在线正则表达式测试
+XPath解析	     lxml	      快	     一般	需要安装C语言依赖库，唯一支持XML的解析器
+CSS选择器解析	  bs4 / pyquery	  不确定 简单
+
+3、BeautifulSoup的使用
+BeautifulSoup是一个可以从HTML或XML文件中提取数据的Python库。它能够通过你喜欢的转换器实现惯用的文档导航、查找、修改文档的方式。
+
 PyQuery的使用
 获取知乎发现上的问题链接
 """
