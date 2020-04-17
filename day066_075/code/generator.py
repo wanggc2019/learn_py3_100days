@@ -34,8 +34,35 @@ def main():
     print('Countdown Over')
 
 
+"""
+生成器还可以叠加来组成生成器管道
+"""
+
+
+# 斐波那契数列生成器Fibonacci
+def fib():
+    a, b = 0, 1
+    while True:
+        a, b = b, a + b
+        yield b
+
+
+# 偶数生成器
+def even(gen):
+    for val in gen:
+        if val % 2 == 0:
+            yield val
+
+
+def main2():
+    gen = even(fib())
+    for _ in range(10):
+        print(next(gen))
+
+
 if __name__ == '__main__':
     main()
+    main2()
 
 
 """

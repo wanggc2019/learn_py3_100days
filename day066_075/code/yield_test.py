@@ -16,10 +16,30 @@ concurrent.futures模块
 
 讨论yield关键字
 带有 yield 的函数在 Python 中被称之为 generator（生成器）
+https://www.jianshu.com/p/de796f35d590
+https://www.jianshu.com/p/f85967d2e2c1
+https://www.bbsmax.com/A/gGdXbLX7J4/
 """
+import asyncio
 
 
-# 斐波那契（Fibonacci）數列是一个非常简单的递归数列，除第一个和第二个数外，任意一个数都可由前两个数相加得到。
+# 通过`yield`来创建生成器
+# 在Python 3中，range()与xrange()合并为range( )。
+def func():
+    for i in range(10):
+        yield i
+
+
+for n in func():
+    print(n, end=' ')
+print()
+
+# 通过列表来创建生成器
+list1 = [i for i in range(10)]
+print(list1)
+
+
+# 斐波那契（Fibonacci）数列是一个非常简单的递归数列，除第一个和第二个数外，任意一个数都可由前两个数相加得到。
 def fab(m):
     n, a, b = 0, 0, 1
     while n < m:
@@ -86,7 +106,7 @@ def fab(m):
 
 for i in Fab(5):
     print(i, end=' ')
-
+print()
 """
 第四个版本的 fab 和第一版相比，仅仅把 print b 改为了 yield b，就在保持简洁性的同时获得了 iterable 的效果。
 f = fab(5)
@@ -101,3 +121,29 @@ f.__next__()
 f.__next__()
 5
 """
+
+
+"""
+我们看一下Python3中的协程库asyncio是怎么实现的
+
+（1）@asyncio.coroutine把一个generator标记为coroutine类型，然后，我们就把这个coroutine扔到EventLoop中执行。
+（2）yield from语法可以让我们方便地调用另一个generator。由于asyncio.sleep()也是一个coroutine，所以线程不会等待asyncio.sleep()，而
+是直接中断并执行下一个消息循环。当asyncio.sleep()返回时，线程就可以从yield from拿到返回值（此处是None），然后接着执行下一行语句。
+（3）asyncio.sleep(1)相当于一个耗时1秒的IO操作，在此期间，主线程并未等待，而是去执行EventLoop中其他可以执行的coroutine了，因此可以实现
+并发执行。
+"""
+
+
+@asyncio.coroutine
+def say_hi(n):
+    print("start:", n)
+    r = yield from asyncio.sleep(2)
+    print("end:", n)
+
+
+loop = asyncio.get_event_loop()
+tasks = [say_hi(0), say_hi(1)]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
+
+
