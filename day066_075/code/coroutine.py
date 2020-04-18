@@ -17,6 +17,7 @@ concurrent.futures模块
 
 from time import sleep
 from functools import wraps
+import asyncio
 
 
 # 生成器 数据生产者
@@ -153,3 +154,50 @@ line 17：跳转到produce函数；打印 Consumer return: 200 OK；
 重复上述循环······
 至于在web编程中利用 gevent 配合 wsgi 服务器如 gunicorn 提高并发性能，可以通过 gevent 库配置。
 """
+
+
+"""
+3、异步I/O - 非阻塞式I/O操作。
+我们看一下Python3中的协程库asyncio是怎么实现的
+
+（1）@asyncio.coroutine把一个generator标记为coroutine类型，然后，我们就把这个coroutine扔到EventLoop中执行。
+（2）yield from语法可以让我们方便地调用另一个generator。由于asyncio.sleep()也是一个coroutine，所以线程不会等待asyncio.sleep()，而
+是直接中断并执行下一个消息循环。当asyncio.sleep()返回时，线程就可以从yield from拿到返回值（此处是None），然后接着执行下一行语句。
+（3）asyncio.sleep(1)相当于一个耗时1秒的IO操作，在此期间，主线程并未等待，而是去执行EventLoop中其他可以执行的coroutine了，因此可以实现
+并发执行。
+"""
+
+
+@asyncio.coroutine
+def say_hi(n):
+    print("start:", n)
+    r = yield from asyncio.sleep(2)
+    print("end:", n)
+
+
+loop = asyncio.get_event_loop()
+tasks = [say_hi(0), say_hi(1)]
+loop.run_until_complete(asyncio.wait(tasks))
+loop.close()
+
+
+"""
+asyncio中get_event_loop()就是事件循环，而装饰器@asyncio.coroutine标记了一个协程，并yield from 语法实现协程切换。在Python3.5中，新
+增了async和await的新语法，代替装饰器和yield from。上例可以用新增语法完全代替。
+将@asyncio.coroutine换成async， 将yield from 换成await  即可。
+"""
+
+
+async def say_hi2(n):
+    print("start....", n)
+    r = await asyncio.sleep(2)
+    print("end....", n)
+
+loop1 = asyncio.get_event_loop()
+tasks1 = [say_hi2(0), say_hi2(1)]
+loop1.run_until_complete(asyncio.wait(tasks1))
+loop1.close()
+
+
+
+
